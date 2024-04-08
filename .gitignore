@@ -1,0 +1,22 @@
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Virtual environment
+*/.venv/
+
+# IDE settings
+.idea/
+
+# Compiled Python files
+*.pyo
+*.pyd
+
+# Caches and logs
+*.log
+*.cache/
+logs/
+
+# Django-specific
+*.sqlite3
+db.sqlite3
