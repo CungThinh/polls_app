@@ -7,8 +7,16 @@ from .forms import QuestionForm
 # Create your views here.
 
 def home(request):
+    search_term = ''
+    questions = Question.objects.all()
+
+    if 'search' in request.GET:
+        search_term = request.GET['search']
+        questions = Question.objects.filter(question_text__icontains=search_term)
+
     context = {
-        "questions": Question.objects.all()
+        "questions": questions,
+        'search_term': search_term
     }
     return render(request, 'polls/home.html', context)
 
@@ -54,3 +62,27 @@ def create(request):
         'form': form
     }
     return render(request, 'polls/create.html', context)
+
+
+def update(request, question_id):
+    question_to_update = Question.objects.get(pk=question_id)
+
+    if request.method == "POST":
+        form = QuestionForm(request.POST, instance=question_to_update)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = QuestionForm(instance=question_to_update)
+
+    context = {
+        'form': form,
+        'question_id': question_id
+    }
+    return render(request, 'polls/update.html', context)
+
+
+def delete(request, question_id):
+    question_to_delete = Question.objects.get(pk=question_id)
+    question_to_delete.delete()
+    return redirect('home')

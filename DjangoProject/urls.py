@@ -23,5 +23,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('vote/<question_id>', views.vote, name="vote"),
     path('results/<question_id>', views.results, name="results"),
-    path('create/', views.create, name="create")
+    path('create/', views.create, name="create"),
+    path('update/<question_id>', views.update, name="update"),
+    path('delete/<question_id>', views.delete, name="delete")
 ]
