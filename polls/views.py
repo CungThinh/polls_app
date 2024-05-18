@@ -36,6 +36,8 @@ def vote(request, question_id):
             question.option_three_count += 1
         elif selected_choice == "option5":
             question.option_three_count += 1
+        elif selected_choice == "option6":
+            question.option_three_count += 1
         else:
             return HttpResponse("Invalid choice")
         question.save()
